@@ -1,20 +1,28 @@
 {
-  "name": "package",
-  "version": "0.0.0",
+  "name": "@authmaker/common",
+  "description": "Base implementation of types for Authmaker",
+  "repository": "",
+  "version": "1.0.0",
   "dependencies": {
-    "authmaker-verify-express": "^2.2.0",
-    "body-parser": "^1.14.1",
-    "cors": "^2.5.3",
-    "express-autoroute-json": "^3.0.0-alpha2.10",
-    "express-autoroute": "^1.2.1",
-    "express-session": "^1.10.4",
-    "express": "^4.12.3",
     "lodash": "^4.13.1",
     "mongoose-nconf-connect": "^1.0.1",
     "mongoose": "^4.0.4",
-    "morgan": "^1.5.2",
-    "nconf": "^0.8.2",
     "q": "^1.2.0",
     "winston": "^2.0.0"
+  },
+  "scripts": {
+    "test": "NODE_ENV=test mocha --recursive --reporter spec",
+    "test-watch": "npm run test -- -w --reporter min"
+  },
+  "devDependencies": {
+    "chai": "^3.0.0",
+    "eslint-config-airbnb": "^9.0.1",
+    "eslint-plugin-import": "^1.10.0",
+    "eslint-plugin-jsx-a11y": "^1.5.3",
+    "eslint-plugin-react": "^5.2.2",
+    "eslint": "^2.13.1",
+    "mocha": "^2.2.5",
+    "nconf": "^0.8.2",
+    "q": "^1.4.1"
   }
 }
