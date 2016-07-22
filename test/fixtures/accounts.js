@@ -1,5 +1,6 @@
 /* global rootRequire */
 
+var _ = require('lodash');
 var moment = require('moment');
 var mongoose = require('mongoose');
 var Q = require('q');
@@ -61,7 +62,10 @@ var accountsToCreate = [
     _id: mongoose.Types.ObjectId(),
     name: 'account with first 3 users',
     expiryDate: moment().add(1, 'hours').toDate(),
-    users: usersToCreate.slice(0, 3).map(user => user._id),
+    users: _.chain(usersToCreate)
+      .slice(0, 3)
+      .map('_id')
+      .value(),
   },
 
   {

@@ -3,7 +3,7 @@
   "description": "Base implementation of types for Authmaker",
   "repository": "https://github.com/Authmaker/common",
   "version": "1.0.0",
-  "licence": "MIT",
+  "license": "MIT",
   "dependencies": {
     "lodash": "^4.13.1",
     "mongoose-nconf-connect": "^1.0.1",
@@ -24,7 +24,6 @@
     "eslint-plugin-react": "^5.2.2",
     "mocha": "^2.2.5",
     "moment": "^2.14.1",
-    "nconf": "^0.8.2",
-    "q": "^1.4.1"
+    "nconf": "^0.8.2"
   }
 }
