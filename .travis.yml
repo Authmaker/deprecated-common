@@ -4,5 +4,5 @@ services: mongodb
 node_js:
   - 6
   - 4
-  - 0.12.x
-  - 0.10.x
+  - 0.12
+  - 0.10
