@@ -34,6 +34,8 @@ var schema = new mongoose.Schema({
     ref: 'ExternalIdentity',
   }],
 
+}, {
+  discriminatorKey: 'kind',
 });
 
 // create indexes
