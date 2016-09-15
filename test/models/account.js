@@ -1,5 +1,3 @@
-/* global rootRequire, describe, beforeEach, afterEach, it */
-
 var expect = require('chai').expect;
 
 var fixture = rootRequire('test/fixtures/accounts');
