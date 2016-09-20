@@ -1,7 +1,7 @@
 var refreshToken = rootRequire('./lib/refreshToken');
 var nconf = require('nconf');
 
-describe('refreshToken function', function() {
+describe.skip('refreshToken function', function() {
   describe('during initialise', function() {
     it('should not succeed with invalid credentials');
     it('should succeed with valid credentials', function() {
@@ -27,7 +27,7 @@ describe('refreshToken function', function() {
   });
 
   describe('refreshing a token', function() {
-    it.only('should refresh tokens', function() {
+    it('should refresh tokens', function() {
       nconf.overrides({
         authmaker: {
           server: {
