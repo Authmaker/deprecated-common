@@ -6,6 +6,8 @@ var schema = new mongoose.Schema({
   name: String,
   stripeId: String,
 
+  metaData: mongoose.Schema.Types.Mixed,
+
   // associations
   plan: {
     type: mongoose.Schema.Types.ObjectId,
