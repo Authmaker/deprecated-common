@@ -1,15 +1,15 @@
 /* global rootRequire */
 
-var _ = require('lodash');
-var moment = require('moment');
-var mongoose = require('mongoose');
-var Q = require('q');
+const _ = require('lodash');
+const moment = require('moment');
+const mongoose = require('mongoose');
+const Q = require('q');
 
-var db = rootRequire('lib/mongodb');
+const db = rootRequire('lib/mongodb');
 
-var models = db.models;
+const models = db.models;
 
-var usersToCreate = [
+const usersToCreate = [
   {
     _id: mongoose.Types.ObjectId(),
     email: 'testuser1@stonecircle.io',
@@ -32,7 +32,7 @@ var usersToCreate = [
   },
 ];
 
-var permissionsToCreate = [
+const permissionsToCreate = [
   {
     _id: mongoose.Types.ObjectId(),
     name: 'first permission',
@@ -40,7 +40,7 @@ var permissionsToCreate = [
   },
 ];
 
-var plansToCreate = [
+const plansToCreate = [
   {
     _id: mongoose.Types.ObjectId(),
     name: 'first plan',
@@ -51,17 +51,17 @@ var plansToCreate = [
 ];
 
 
-var accountsToCreate = [
+const accountsToCreate = [
   {
     _id: mongoose.Types.ObjectId(),
     name: 'superAccount',
-    expiryDate: moment().subtract(1, 'hours').toDate(),
+    expiry: moment().subtract(1, 'hours').toDate(),
   },
 
   {
     _id: mongoose.Types.ObjectId(),
     name: 'account with first 3 users',
-    expiryDate: moment().add(1, 'hours').toDate(),
+    expiry: moment().add(1, 'hours').toDate(),
     users: _.chain(usersToCreate)
       .slice(0, 3)
       .map('_id')
@@ -71,7 +71,7 @@ var accountsToCreate = [
   {
     _id: mongoose.Types.ObjectId(),
     name: 'first permission account',
-    expiryDate: moment().add(1, 'hours').toDate(),
+    expiry: moment().add(1, 'hours').toDate(),
     users: [
       usersToCreate[1]._id,
     ],
@@ -81,7 +81,7 @@ var accountsToCreate = [
   {
     _id: mongoose.Types.ObjectId(),
     name: 'first permission account',
-    expiryDate: moment().subtract(1, 'hours').toDate(),
+    expiry: moment().subtract(1, 'hours').toDate(),
     users: [
       usersToCreate[0]._id,
     ],
@@ -89,24 +89,24 @@ var accountsToCreate = [
 ];
 
 function init() {
-  return models.account.create(accountsToCreate).then(function() {
+  return models.account.create(accountsToCreate).then(function () {
     return models.user.create(usersToCreate);
   })
-  .then(function() {
-    return models.plan.create(plansToCreate);
-  })
-  .then(function() {
-    return models.permission.create(permissionsToCreate);
-  });
+    .then(function () {
+      return models.plan.create(plansToCreate);
+    })
+    .then(function () {
+      return models.permission.create(permissionsToCreate);
+    });
 }
 
 function reset() {
   // only allow this in test
   if (process.env.NODE_ENV === 'test') {
-    return db.getConnection().then(function(connection) {
-      var collections = connection.collections;
+    return db.getConnection().then(function (connection) {
+      const collections = connection.collections;
 
-      var promises = Object.keys(collections).map(function(collection) {
+      const promises = Object.keys(collections).map(function (collection) {
         return Q.ninvoke(collections[collection], 'remove');
       });
 
@@ -114,7 +114,7 @@ function reset() {
     });
   }
   // eslint-disable-next-line max-len,vars-on-top
-  var errorMessage = 'Excuse me kind sir, but may I enquire as to why you are currently running reset() in a non test environment? I do propose that it is a beastly thing to do and kindly ask you to refrain from this course of action. Sincerely yours, The Computer.';
+  const errorMessage = 'Excuse me kind sir, but may I enquire as to why you are currently running reset() in a non test environment? I do propose that it is a beastly thing to do and kindly ask you to refrain from this course of action. Sincerely yours, The Computer.';
 
   console.log(errorMessage); // eslint-disable-line no-console
   console.error(errorMessage); // eslint-disable-line no-console
@@ -122,7 +122,7 @@ function reset() {
 }
 
 module.exports = {
-  init: init,
-  reset: reset,
-  models: models,
+  init,
+  reset,
+  models,
 };

@@ -1,8 +1,8 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-var schema = new mongoose.Schema({
+const schema = new mongoose.Schema({
   // parameters
-  expiryDate: Date,
+  expiry: Date,
   name: String,
   stripeId: String,
 

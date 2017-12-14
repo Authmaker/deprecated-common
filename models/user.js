@@ -1,9 +1,8 @@
-var mongoose = require('mongoose');
-var _ = require('lodash');
-var Q = require('q');
+const mongoose = require('mongoose');
+const _ = require('lodash');
+const Q = require('q');
 
-var schema = new mongoose.Schema({
-
+const schema = new mongoose.Schema({
   // User key - unique
   email: String, // username
   clientId: String,
@@ -49,56 +48,44 @@ schema.index({
 });
 
 // schema methods
-schema.methods.getAccounts = function() {
+schema.methods.getAccounts = function getAccounts() {
   return this.model('Account').find({
     users: this._id,
   });
 };
 
-schema.methods.getActivePlans = function() {
-  return this.getAccounts().then(function(accounts) {
-    var activeAccounts = _.chain(accounts)
-      .filter(function(account) {
-        return account.expiryDate > new Date();
-      })
+schema.methods.getActivePlans = function getActivePlans() {
+  return this.getAccounts().then((accounts) => {
+    const activeAccounts = _.chain(accounts)
+      .filter(account => account.expiry > new Date())
       .compact()
       .value();
 
-    var promises = activeAccounts.map(function(account) {
-      return account.populate('plan').execPopulate();
-    });
+    const promises = activeAccounts.map(account => account.populate('plan').execPopulate());
 
-    return Q.all(promises).then(function(populatedAccounts) {
-      return _.chain(populatedAccounts)
-        .map('plan')
-        .compact()
-        .uniq()
-        .value();
-    });
+    return Q.all(promises).then(populatedAccounts => _.chain(populatedAccounts)
+      .map('plan')
+      .compact()
+      .uniq()
+      .value());
   });
 };
 
-schema.methods.getActivePermissions = function() {
-  return this.getActivePlans().then(function(plans) {
-    var promises = plans.map(function(plan) {
-      return plan.populate('permissions').execPopulate();
-    });
+schema.methods.getActivePermissions = function getActivePermissions() {
+  return this.getActivePlans().then((plans) => {
+    const promises = plans.map(plan => plan.populate('permissions').execPopulate());
 
-    return Q.all(promises).then(function(populatedPlans) {
-      return _.chain(populatedPlans)
-        .map('permissions')
-        .flatten()
-        .uniq()
-        .compact()
-        .value();
-    });
+    return Q.all(promises).then(populatedPlans => _.chain(populatedPlans)
+      .map('permissions')
+      .flatten()
+      .uniq()
+      .compact()
+      .value());
   });
 };
 
-schema.methods.getActivePermissionScopes = function() {
-  return this.getActivePermissions().then(function(permissions) {
-    return _.map(permissions, 'scope');
-  });
+schema.methods.getActivePermissionScopes = function getActivePermissionScopes() {
+  return this.getActivePermissions().then(permissions => _.map(permissions, 'scope'));
 };
 
 module.exports = schema;
