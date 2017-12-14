@@ -1,7 +1,7 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-var schema = new mongoose.Schema({
-  access_token: String,
+const schema = new mongoose.Schema({
+  accessToken: String,
   tag: String,
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   date: Date,
