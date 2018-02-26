@@ -6,9 +6,9 @@
   "license": "MIT",
   "author": "Chris Manson <chris@stonecircle.io>",
   "dependencies": {
-    "lodash": "^4.15.0",
+    "lodash": "^4.17.5",
     "mongoose": "^4.5.9",
-    "mongoose-nconf-connect": "^1.1.0",
+    "mongoose-nconf-connect": "^2.2.0",
     "q": "^1.2.0",
     "winston": "^2.0.0"
   },
