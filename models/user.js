@@ -5,7 +5,10 @@ const Q = require('q');
 const schema = new mongoose.Schema({
   // User key - unique
   email: String, // username
-  clientId: String,
+  clientId: {
+    type: String,
+    ref: 'OauthClient',
+  },
 
   // user fields
   displayName: String,
