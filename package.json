@@ -2,7 +2,7 @@
   "name": "@authmaker/common",
   "description": "Base implementation of types for Authmaker",
   "repository": "https://github.com/Authmaker/common",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "license": "MIT",
   "author": "Chris Manson <chris@stonecircle.io>",
   "dependencies": {
