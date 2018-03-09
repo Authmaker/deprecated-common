@@ -36,7 +36,7 @@ const schema = new mongoose.Schema({
     ref: 'ExternalIdentity',
   }],
 
-});
+}, { usePushEach: true });
 
 // create indexes
 schema.index({
