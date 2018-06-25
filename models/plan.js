@@ -2,7 +2,10 @@ const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
   name: String,
-  stripePlan: String,
+  stripePlan: {
+    type: String,
+    ref: 'stripe-plan',
+  },
   allowSubscriptions: Boolean,
 
   // references
