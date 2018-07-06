@@ -1,8 +1,8 @@
 /* global before */
 
-var nconf = require('nconf');
+const nconf = require('nconf');
 
-var dbConnectionFunction = require('../lib/mongodb').init;
+const { init, getConnection } = require('../lib/mongodb');
 
 nconf.defaults({
   authmaker: {
@@ -14,6 +14,12 @@ nconf.defaults({
   },
 });
 
-before(function() {
-  return dbConnectionFunction(nconf);
+before(function () {
+  return init(nconf);
+});
+
+after(() => {
+  getConnection().then((connection) => {
+    connection.close();
+  });
 });

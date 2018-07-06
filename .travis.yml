@@ -1,5 +1,9 @@
 sudo: false
 
+env:
+  global:
+    - CC_TEST_REPORTER_ID=ce3c363ffb0df9ed6d0d766c56d5f4a03b146a0ca3e348c5a8efc1c496934eed
+
 language: node_js
 services: mongodb
 
@@ -11,11 +15,12 @@ node_js:
   - 8
   - 6
 
-addons:
-  code_climate:
-    repo_token: 1250a5b6885e3e3c9ee079ea1843777db9e5e9598c5468a0ec91d7eca6f42916
+before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
 
 script: npm run coverage
 
 after_script:
-  - codeclimate-test-reporter < coverage/lcov.info
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
